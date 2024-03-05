@@ -4,10 +4,11 @@ import com.challenge.backend.ecommerce.dto.CategoryResponseDto;
 import com.challenge.backend.ecommerce.entity.Category;
 import com.challenge.backend.ecommerce.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Validated
 @RestController
 @RequestMapping("/category")
 public class CategoryController {

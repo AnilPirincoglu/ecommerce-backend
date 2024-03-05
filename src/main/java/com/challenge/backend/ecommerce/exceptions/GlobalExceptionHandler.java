@@ -1,7 +1,10 @@
 package com.challenge.backend.ecommerce.exceptions;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -16,6 +19,23 @@ public class GlobalExceptionHandler {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 status.value(), status.name(),
                 globalException.getMessage(), Instant.now());
+
+        return new ResponseEntity<>(exceptionResponse, status);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionResponse> exceptionHandler(ConstraintViolationException notValidException) {
+        var status = HttpStatus.BAD_REQUEST;
+
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                status.value(),
+                status.name(),
+                notValidException.getConstraintViolations()
+                        .stream()
+                        .findFirst()
+                        .get()
+                        .getMessage(),
+                Instant.now());
 
         return new ResponseEntity<>(exceptionResponse, status);
     }

@@ -1,6 +1,8 @@
 package com.challenge.backend.ecommerce.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,15 +26,22 @@ public class ApplicationUser implements UserDetails {
     private Long id;
 
     @Column(name = "name")
+    @NotBlank(message = "Name can not be blank")
+    @Size(min = 2,max = 30, message = "Name must be more than 2 and less than 30 character")
     private String name;
 
     @Column(name = "surname")
+    @NotBlank(message = "Surname can not be blank")
+    @Size(min = 2,max = 30, message = "Name must be more than 2 and less than 30 character")
     private String surname;
 
     @Column(name = "email")
+    @NotBlank(message = "Email can not be blank")
+    @Size(min = 10,max = 80, message = "Name must be more than 10 and less than 80 character")
     private String email;
 
     @Column(name = "password")
+    @NotBlank(message = "Password can not be blank")
     private String password;
 
     @Column(name = "register_date")
