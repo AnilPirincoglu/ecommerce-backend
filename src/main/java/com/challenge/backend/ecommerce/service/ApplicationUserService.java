@@ -1,6 +1,5 @@
 package com.challenge.backend.ecommerce.service;
 
-import com.challenge.backend.ecommerce.dto.ApplicationUserRequestDto;
 import com.challenge.backend.ecommerce.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
