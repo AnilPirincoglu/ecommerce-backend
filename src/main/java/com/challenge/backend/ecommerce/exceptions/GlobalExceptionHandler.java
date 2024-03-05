@@ -3,8 +3,7 @@ package com.challenge.backend.ecommerce.exceptions;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -38,6 +37,13 @@ public class GlobalExceptionHandler {
                 Instant.now());
 
         return new ResponseEntity<>(exceptionResponse, status);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionResponse> exceptionHandler(UsernameNotFoundException userNotFound){
+        var status=HttpStatus.NOT_FOUND;
+        ExceptionResponse exceptionResponse = new ExceptionResponse(status.value(),status.name(),userNotFound.getMessage(),Instant.now());
+        return new ResponseEntity<>(exceptionResponse,status);
     }
 
     @ExceptionHandler
