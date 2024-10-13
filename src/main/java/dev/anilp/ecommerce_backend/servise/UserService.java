@@ -1,7 +1,10 @@
 package dev.anilp.ecommerce_backend.servise;
 
+import dev.anilp.ecommerce_backend.dto.user.CreateUserRequestDTO;
+import dev.anilp.ecommerce_backend.dto.user.UpdateUserRequestDTO;
 import dev.anilp.ecommerce_backend.dto.user.UserResponseDTO;
 import dev.anilp.ecommerce_backend.entity.user.User;
+import dev.anilp.ecommerce_backend.exception.exception_class.DuplicateResourceException;
 import dev.anilp.ecommerce_backend.exception.exception_class.ResourceNotFoundException;
 import dev.anilp.ecommerce_backend.mapper.UserMapper;
 import dev.anilp.ecommerce_backend.repository.UserRepository;
@@ -41,6 +44,20 @@ public class UserService {
                 userRepository.findAll()
         );
     }
+
+    public void createUser(CreateUserRequestDTO createUser) {
+        checkEmailExistence(createUser.email());
+        userRepository.save(
+                mapper.requestToUser(createUser)
+        );
+    }
+
+    private void checkEmailExistence(String email) {
+        if (userRepository.existsByEmail(email)) {
+            throw new DuplicateResourceException(USER, EMAIL, email);
+        }
+    }
+
     public User findUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(USER, ID, id.toString()));
