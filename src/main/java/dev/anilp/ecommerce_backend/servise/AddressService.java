@@ -47,6 +47,13 @@ public class AddressService {
         addressRepository.save(createdAddress);
     }
 
+    public void updateAddressOfUser(Long userId, Long addressId, UpdateAddressRequestDTO updateAddress) {
+        User user = userService.findUserById(userId);
+        Address address = findUserAddressById(addressId, user);
+        mapper.updateAddressFromDto(address, updateAddress);
+        addressRepository.save(address);
+    }
+
     private Address findUserAddressById(Long addressId, User user) {
         return user.getAddresses()
                 .stream()
