@@ -1,8 +1,10 @@
 package dev.anilp.ecommerce_backend.servise;
 
+import dev.anilp.ecommerce_backend.dto.phone_number.CreatePhoneNumberRequestDTO;
 import dev.anilp.ecommerce_backend.dto.phone_number.PhoneNumberResponseDTO;
 import dev.anilp.ecommerce_backend.entity.phone_number.PhoneNumber;
 import dev.anilp.ecommerce_backend.entity.user.User;
+import dev.anilp.ecommerce_backend.exception.exception_class.DuplicateResourceException;
 import dev.anilp.ecommerce_backend.exception.exception_class.ResourceNotFoundException;
 import dev.anilp.ecommerce_backend.mapper.UserMapper;
 import dev.anilp.ecommerce_backend.repository.PhoneNumberRepository;
@@ -37,6 +39,20 @@ public class PhoneNumberService {
         return mapper.PhoneNumbersToResponsesList(
                 userService.findUserById(userId).getPhoneNumbers()
         );
+    }
+
+    public void addPhoneNumberToUser(Long userId, CreatePhoneNumberRequestDTO createPhoneNumber) {
+        checkPhoneNumberExistence(createPhoneNumber.phoneNumber());
+        User user = userService.findUserById(userId);
+        PhoneNumber phoneNumber = mapper.requestToPhoneNumber(createPhoneNumber);
+        user.addPhoneNumber(phoneNumber);
+        phoneNumberRepository.save(phoneNumber);
+    }
+
+    private void checkPhoneNumberExistence(String phoneNumber) {
+        if (phoneNumberRepository.existsByPhoneNumber(phoneNumber)) {
+            throw new DuplicateResourceException(PHONE_NUMBER, PHONE_NUMBER, phoneNumber);
+        }
     }
 
     private PhoneNumber findUserPhoneNumberById(Long phoneNumberId, User user) {
