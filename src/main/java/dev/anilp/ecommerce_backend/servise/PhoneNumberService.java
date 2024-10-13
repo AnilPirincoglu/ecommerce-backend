@@ -8,6 +8,8 @@ import dev.anilp.ecommerce_backend.mapper.UserMapper;
 import dev.anilp.ecommerce_backend.repository.PhoneNumberRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static dev.anilp.ecommerce_backend.exception.ExceptionConstant.ID;
 import static dev.anilp.ecommerce_backend.exception.ExceptionConstant.PHONE_NUMBER;
 
@@ -28,6 +30,12 @@ public class PhoneNumberService {
 
         return mapper.phoneNumberToResponse(
                 findUserPhoneNumberById(phoneNumberId, user)
+        );
+    }
+
+    public List<PhoneNumberResponseDTO> getPhoneNumbersOfUser(Long userId) {
+        return mapper.PhoneNumbersToResponsesList(
+                userService.findUserById(userId).getPhoneNumbers()
         );
     }
 
