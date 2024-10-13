@@ -26,6 +26,12 @@ public class UserService {
         );
     }
 
+    public UserResponseDTO getUserByEmail(String email) {
+        return mapper.userToResponse(
+                userRepository.findByEmail(email)
+                        .orElseThrow(() -> new ResourceNotFoundException(USER, ID, email))
+        );
+    }
     public User findUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(USER, ID, id.toString()));
