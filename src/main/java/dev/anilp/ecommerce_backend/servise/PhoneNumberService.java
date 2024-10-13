@@ -58,6 +58,13 @@ public class PhoneNumberService {
         phoneNumberRepository.save(phoneNumber);
     }
 
+    public void deletePhoneNumberFromUser(Long userId, Long phoneNumberId) {
+        User user = userService.findUserById(userId);
+        PhoneNumber phoneNumber = findUserPhoneNumberById(phoneNumberId, user);
+        user.getPhoneNumbers().remove(phoneNumber);
+        phoneNumberRepository.deleteById(phoneNumberId);
+    }
+
     private void checkPhoneNumberExistence(String phoneNumber) {
         if (phoneNumberRepository.existsByPhoneNumber(phoneNumber)) {
             throw new DuplicateResourceException(PHONE_NUMBER, PHONE_NUMBER, phoneNumber);
