@@ -1,5 +1,6 @@
 package dev.anilp.ecommerce_backend.exception;
 
+import dev.anilp.ecommerce_backend.exception.exception_class.DuplicateResourceException;
 import dev.anilp.ecommerce_backend.exception.exception_class.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -20,6 +21,11 @@ import java.util.List;
 public class DefaultExceptionHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultExceptionHandler.class);
+
+    @ExceptionHandler(DuplicateResourceException.class)
+    public ResponseEntity<ErrorResponse> handle(DuplicateResourceException e, HttpServletRequest request) {
+        return handleException(e, request, HttpStatus.CONFLICT);
+    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handle(ResourceNotFoundException e, HttpServletRequest request) {
