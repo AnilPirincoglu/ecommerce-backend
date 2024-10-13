@@ -1,6 +1,8 @@
 package dev.anilp.ecommerce_backend.servise;
 
 import dev.anilp.ecommerce_backend.dto.address.AddressResponseDTO;
+import dev.anilp.ecommerce_backend.dto.address.CreateAddressRequestDTO;
+import dev.anilp.ecommerce_backend.dto.address.UpdateAddressRequestDTO;
 import dev.anilp.ecommerce_backend.entity.address.Address;
 import dev.anilp.ecommerce_backend.entity.user.User;
 import dev.anilp.ecommerce_backend.exception.exception_class.ResourceNotFoundException;
@@ -36,6 +38,13 @@ public class AddressService {
     public List<AddressResponseDTO> getAddressesOfUser(Long userId) {
         return mapper.AddressesToResponsesList(
                 userService.findUserById(userId).getAddresses());
+    }
+
+    public void addAddressToUser(Long userId, CreateAddressRequestDTO createAddress) {
+        User user = userService.findUserById(userId);
+        Address createdAddress = mapper.requestToAddress(createAddress);
+        user.addAddress(createdAddress);
+        addressRepository.save(createdAddress);
     }
 
     private Address findUserAddressById(Long addressId, User user) {
