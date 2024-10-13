@@ -54,6 +54,13 @@ public class AddressService {
         addressRepository.save(address);
     }
 
+    public void deleteAddressFromUser(Long userId, Long addressId) {
+        User user = userService.findUserById(userId);
+        Address address = findUserAddressById(addressId, user);
+        user.getAddresses().remove(address);
+        addressRepository.deleteById(addressId);
+    }
+
     private Address findUserAddressById(Long addressId, User user) {
         return user.getAddresses()
                 .stream()
