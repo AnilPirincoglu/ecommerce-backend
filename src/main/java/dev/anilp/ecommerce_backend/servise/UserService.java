@@ -52,6 +52,13 @@ public class UserService {
         );
     }
 
+    public void updateUser(Long userId, UpdateUserRequestDTO updateUser) {
+        checkEmailExistence(updateUser.email());
+        User user = findUserById(userId);
+        mapper.updateUserFromDto(user, updateUser);
+        userRepository.save(user);
+    }
+
     private void checkEmailExistence(String email) {
         if (userRepository.existsByEmail(email)) {
             throw new DuplicateResourceException(USER, EMAIL, email);
