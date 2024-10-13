@@ -8,6 +8,8 @@ import dev.anilp.ecommerce_backend.mapper.UserMapper;
 import dev.anilp.ecommerce_backend.repository.AddressRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static dev.anilp.ecommerce_backend.exception.ExceptionConstant.ADDRESS;
 import static dev.anilp.ecommerce_backend.exception.ExceptionConstant.ID;
 
@@ -29,6 +31,11 @@ public class AddressService {
         return mapper.addressToResponse(
                 findUserAddressById(addressId, user)
         );
+    }
+
+    public List<AddressResponseDTO> getAddressesOfUser(Long userId) {
+        return mapper.AddressesToResponsesList(
+                userService.findUserById(userId).getAddresses());
     }
 
     private Address findUserAddressById(Long addressId, User user) {
