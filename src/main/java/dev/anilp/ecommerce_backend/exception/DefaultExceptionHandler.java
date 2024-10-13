@@ -1,5 +1,6 @@
 package dev.anilp.ecommerce_backend.exception;
 
+import dev.anilp.ecommerce_backend.exception.exception_class.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,11 @@ import java.util.List;
 public class DefaultExceptionHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultExceptionHandler.class);
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handle(ResourceNotFoundException e, HttpServletRequest request) {
+        return handleException(e, request, HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handle(MethodArgumentNotValidException e, HttpServletRequest request) {
