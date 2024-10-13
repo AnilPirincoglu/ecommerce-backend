@@ -59,6 +59,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void deleteUser(Long userId) {
+        userRepository.delete(
+                findUserById(userId)
+        );
+    }
+
     private void checkEmailExistence(String email) {
         if (userRepository.existsByEmail(email)) {
             throw new DuplicateResourceException(USER, EMAIL, email);
