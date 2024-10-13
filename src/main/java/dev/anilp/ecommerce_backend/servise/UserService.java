@@ -7,6 +7,9 @@ import dev.anilp.ecommerce_backend.mapper.UserMapper;
 import dev.anilp.ecommerce_backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+import static dev.anilp.ecommerce_backend.exception.ExceptionConstant.EMAIL;
 import static dev.anilp.ecommerce_backend.exception.ExceptionConstant.ID;
 import static dev.anilp.ecommerce_backend.exception.ExceptionConstant.USER;
 
@@ -30,6 +33,12 @@ public class UserService {
         return mapper.userToResponse(
                 userRepository.findByEmail(email)
                         .orElseThrow(() -> new ResourceNotFoundException(USER, ID, email))
+        );
+    }
+
+    public List<UserResponseDTO> getAllUsers() {
+        return mapper.UsersToResponsesList(
+                userRepository.findAll()
         );
     }
     public User findUserById(Long id) {
