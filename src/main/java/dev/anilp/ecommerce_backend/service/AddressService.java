@@ -1,4 +1,4 @@
-package dev.anilp.ecommerce_backend.servise;
+package dev.anilp.ecommerce_backend.service;
 
 import dev.anilp.ecommerce_backend.dto.address.AddressResponseDTO;
 import dev.anilp.ecommerce_backend.dto.address.CreateAddressRequestDTO;

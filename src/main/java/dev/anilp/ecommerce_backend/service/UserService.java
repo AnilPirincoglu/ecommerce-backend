@@ -1,4 +1,4 @@
-package dev.anilp.ecommerce_backend.servise;
+package dev.anilp.ecommerce_backend.service;
 
 import dev.anilp.ecommerce_backend.dto.user.CreateUserRequestDTO;
 import dev.anilp.ecommerce_backend.dto.user.UpdateUserRequestDTO;

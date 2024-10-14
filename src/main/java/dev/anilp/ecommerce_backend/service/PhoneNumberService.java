@@ -1,4 +1,4 @@
-package dev.anilp.ecommerce_backend.servise;
+package dev.anilp.ecommerce_backend.service;
 
 import dev.anilp.ecommerce_backend.dto.phone_number.CreatePhoneNumberRequestDTO;
 import dev.anilp.ecommerce_backend.dto.phone_number.PhoneNumberResponseDTO;
