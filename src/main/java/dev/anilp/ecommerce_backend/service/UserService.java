@@ -52,14 +52,14 @@ public class UserService {
         );
     }
 
-    public void updateUser(Long userId, UpdateUserRequestDTO updateUser) {
+    public void updateUserById(Long userId, UpdateUserRequestDTO updateUser) {
         checkEmailExistence(updateUser.email());
         User user = findUserById(userId);
         mapper.updateUserFromDto(user, updateUser);
         userRepository.save(user);
     }
 
-    public void deleteUser(Long userId) {
+    public void deleteUserById(Long userId) {
         userRepository.delete(
                 findUserById(userId)
         );

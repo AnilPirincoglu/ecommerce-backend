@@ -48,12 +48,12 @@ public class UserController {
     @PutMapping("{userId}")
     public void updateUser(@PathVariable Long userId,
                            @Valid @RequestBody UpdateUserRequestDTO updateUser) {
-        userService.updateUser(userId, updateUser);
+        userService.updateUserById(userId, updateUser);
     }
 
     @DeleteMapping("{userId}")
     public void deleteUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
+        userService.deleteUserById(userId);
     }
 
 }
