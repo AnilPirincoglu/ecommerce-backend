@@ -26,11 +26,11 @@ public interface UserMapper {
 
     PhoneNumberResponseDTO phoneNumberToResponse(PhoneNumber phoneNumber);
 
-    List<UserResponseDTO> UsersToResponsesList(List<User> users);
+    List<UserResponseDTO> usersToResponsesList(List<User> users);
 
-    List<AddressResponseDTO> AddressesToResponsesList(List<Address> addresses);
+    List<AddressResponseDTO> addressesToResponsesList(List<Address> addresses);
 
-    List<PhoneNumberResponseDTO> PhoneNumbersToResponsesList(List<PhoneNumber> phoneNumbers);
+    List<PhoneNumberResponseDTO> phoneNumbersToResponsesList(List<PhoneNumber> phoneNumbers);
 
     User requestToUser(CreateUserRequestDTO createUser);
 

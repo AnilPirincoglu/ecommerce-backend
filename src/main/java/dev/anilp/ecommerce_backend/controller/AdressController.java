@@ -3,7 +3,7 @@ package dev.anilp.ecommerce_backend.controller;
 import dev.anilp.ecommerce_backend.dto.address.AddressResponseDTO;
 import dev.anilp.ecommerce_backend.dto.address.CreateAddressRequestDTO;
 import dev.anilp.ecommerce_backend.dto.address.UpdateAddressRequestDTO;
-import dev.anilp.ecommerce_backend.servise.AddressService;
+import dev.anilp.ecommerce_backend.service.AddressService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

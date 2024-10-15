@@ -3,7 +3,7 @@ package dev.anilp.ecommerce_backend.controller;
 import dev.anilp.ecommerce_backend.dto.user.CreateUserRequestDTO;
 import dev.anilp.ecommerce_backend.dto.user.UpdateUserRequestDTO;
 import dev.anilp.ecommerce_backend.dto.user.UserResponseDTO;
-import dev.anilp.ecommerce_backend.servise.UserService;
+import dev.anilp.ecommerce_backend.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

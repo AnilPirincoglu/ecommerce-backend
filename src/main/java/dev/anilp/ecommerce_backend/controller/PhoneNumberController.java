@@ -3,7 +3,7 @@ package dev.anilp.ecommerce_backend.controller;
 import dev.anilp.ecommerce_backend.dto.phone_number.CreatePhoneNumberRequestDTO;
 import dev.anilp.ecommerce_backend.dto.phone_number.PhoneNumberResponseDTO;
 import dev.anilp.ecommerce_backend.dto.phone_number.UpdatePhoneNumberRequestDTO;
-import dev.anilp.ecommerce_backend.servise.PhoneNumberService;
+import dev.anilp.ecommerce_backend.service.PhoneNumberService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

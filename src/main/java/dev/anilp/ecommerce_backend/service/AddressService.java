@@ -36,7 +36,7 @@ public class AddressService {
     }
 
     public List<AddressResponseDTO> getAddressesOfUser(Long userId) {
-        return mapper.AddressesToResponsesList(
+        return mapper.addressesToResponsesList(
                 userService.findUserById(userId).getAddresses());
     }
 

@@ -37,7 +37,7 @@ public class PhoneNumberService {
     }
 
     public List<PhoneNumberResponseDTO> getPhoneNumbersOfUser(Long userId) {
-        return mapper.PhoneNumbersToResponsesList(
+        return mapper.phoneNumbersToResponsesList(
                 userService.findUserById(userId).getPhoneNumbers()
         );
     }

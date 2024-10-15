@@ -40,7 +40,7 @@ public class UserService {
     }
 
     public List<UserResponseDTO> getAllUsers() {
-        return mapper.UsersToResponsesList(
+        return mapper.usersToResponsesList(
                 userRepository.findAll()
         );
     }
