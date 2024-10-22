@@ -9,5 +9,5 @@ public class ExceptionConstant {
     public static final String PHONE = "PHONE";
     public static final String PHONE_AND_USER_ID = "PHONE ID AND USER ID";
     public static final String ADDRESS_AND_USER_ID = "ADDRESS ID AND USER ID";
-
+    public static final String PRODUCT = "PRODUCT";
 }
