@@ -1,4 +1,4 @@
-package dev.anilp.ecommerce_backend.entity;
+package dev.anilp.ecommerce_backend.entity.base_entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
@@ -8,7 +8,7 @@ import jakarta.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-public class BaseEntity {
+public class BaseEntityForPostgres {
     @Column(name = "created_at", nullable = false, updatable = false)
     protected LocalDateTime createdAt;
     @Column(name = "updated_at", nullable = false)

@@ -1,6 +1,6 @@
 package dev.anilp.ecommerce_backend.entity.address;
 
-import dev.anilp.ecommerce_backend.entity.BaseEntity;
+import dev.anilp.ecommerce_backend.entity.base_entity.BaseEntityForPostgres;
 import dev.anilp.ecommerce_backend.entity.user.User;
 import dev.anilp.ecommerce_backend.validation.PostalCode;
 import jakarta.persistence.CascadeType;
@@ -30,7 +30,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table
-public class Address extends BaseEntity {
+public class Address extends BaseEntityForPostgres {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
