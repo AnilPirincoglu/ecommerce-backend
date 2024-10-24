@@ -1,5 +1,6 @@
 package dev.anilp.ecommerce_backend.entity.user;
 
+import dev.anilp.ecommerce_backend.entity.Cart;
 import dev.anilp.ecommerce_backend.entity.address.Address;
 import dev.anilp.ecommerce_backend.entity.base_entity.BaseEntityForPostgres;
 import dev.anilp.ecommerce_backend.entity.phone.Phone;
@@ -13,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -72,6 +74,14 @@ public class User extends BaseEntityForPostgres {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Cart cart;
+
+    public void addCart(Cart cart) {
+        this.cart = cart;
+        cart.setUser(this);
+    }
+
     public void addPhone(Phone phone) {
         phone.setUser(this);
         phones.add(phone);
@@ -100,15 +110,16 @@ public class User extends BaseEntityForPostgres {
 
     @Override
     public String toString() {
-        return "ApplicationUser{" +
+        return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
                 ", dateOfBirth=" + dateOfBirth +
-                ", phoneNumbers=" + phones +
+                ", phones=" + phones +
                 ", addresses=" + addresses +
+                ", cart=" + cart +
                 '}';
     }
 }
