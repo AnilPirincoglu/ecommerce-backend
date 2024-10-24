@@ -11,7 +11,7 @@ CREATE TABLE _user
 );
 
 
-COMMENT ON TABLE _user IS 'Stores information about application users';
+COMMENT ON TABLE _user IS 'Stores information about users';
 COMMENT ON COLUMN _user.id IS 'Unique identifier for the user';
 COMMENT ON COLUMN _user.first_name IS 'User''s first name';
 COMMENT ON COLUMN _user.last_name IS 'User''s last name';
