@@ -2,7 +2,7 @@ package dev.anilp.ecommerce_backend.repository;
 
 import dev.anilp.ecommerce_backend.entity.phone.Phone;
 import dev.anilp.ecommerce_backend.entity.user.User;
-import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(properties = {
         "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
-        "spring.jpa.properties.jakarta.persistence.validation.mode=none"
+        "spring.jpa.properties.jakarta.persistence.validation.mode=none",
+        "spring.flyway.enabled=false",
+        "spring.jpa.hibernate.ddl-auto=update"
 })
 class PhoneRepositoryTest {
     @Autowired
@@ -29,17 +31,12 @@ class PhoneRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private Flyway flyway;
-
     private User userWithPhone;
     private Phone phone;
     private User userWithoutPhone;
 
     @BeforeEach
     void setUp() {
-        flyway.clean();
-        flyway.migrate();
         userWithPhone = new User(
                 null,
                 "Test First Name",
@@ -47,7 +44,7 @@ class PhoneRepositoryTest {
                 "withphone@test.com",
                 FEMALE,
                 LocalDate.of(1990, 1, 1),
-                new ArrayList<>(), new ArrayList<>()
+                new ArrayList<>(), new ArrayList<>(), null
         );
         phone = new Phone(
                 null,
@@ -57,15 +54,23 @@ class PhoneRepositoryTest {
         );
         userWithPhone.addPhone(phone);
         phoneRepository.save(phone);
+
         userWithoutPhone = new User(
                 null,
                 "Test First Name",
                 "Test Last Name",
-                "withoutphone@test.com",
+                "no_phone@test.com",
                 FEMALE,
                 LocalDate.of(1990, 1, 1),
-                new ArrayList<>(), new ArrayList<>());
+                new ArrayList<>(), new ArrayList<>(),
+                null
+        );
         userRepository.save(userWithoutPhone);
+    }
+
+    @AfterEach
+    void tearDown() {
+        userRepository.deleteAll();
     }
 
     @Nested

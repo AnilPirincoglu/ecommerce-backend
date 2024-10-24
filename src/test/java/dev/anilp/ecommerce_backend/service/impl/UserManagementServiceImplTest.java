@@ -50,7 +50,7 @@ class UserManagementServiceImplTest {
                 "test@email.com",
                 MALE,
                 LocalDate.of(1990, 1, 1),
-                new ArrayList<>(), new ArrayList<>()
+                new ArrayList<>(), new ArrayList<>(), null
         );
         Phone phone = new Phone(1L,
                 PhoneType.MOBILE,

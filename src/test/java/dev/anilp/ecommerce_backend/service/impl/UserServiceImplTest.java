@@ -57,7 +57,7 @@ class UserServiceImplTest {
                 "mail@test.com",
                 MALE,
                 LocalDate.of(1990, 1, 1),
-                new ArrayList<>(), new ArrayList<>()
+                new ArrayList<>(), new ArrayList<>(), null
         );
         createUserRequestDTO = new CreateUserRequestDTO(
                 "create",
@@ -115,7 +115,7 @@ class UserServiceImplTest {
                     requestDTO.email(),
                     requestDTO.gender(),
                     requestDTO.dateOfBirth(),
-                    new ArrayList<>(), new ArrayList<>());
+                    new ArrayList<>(), new ArrayList<>(), null);
 
             given(userRepository.existsByEmail(requestDTO.email())).willReturn(false);
             given(userMapper.requestToUser(requestDTO)).willReturn(createdUser);

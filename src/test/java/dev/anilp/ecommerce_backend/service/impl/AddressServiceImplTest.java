@@ -66,7 +66,7 @@ class AddressServiceImplTest {
                 "mail@test.com",
                 MALE,
                 LocalDate.of(1990, 1, 1),
-                new ArrayList<>(), new ArrayList<>()
+                new ArrayList<>(), new ArrayList<>(), null
         );
         address = new Address(
                 1L,

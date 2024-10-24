@@ -2,7 +2,7 @@ package dev.anilp.ecommerce_backend.repository;
 
 import dev.anilp.ecommerce_backend.entity.address.Address;
 import dev.anilp.ecommerce_backend.entity.user.User;
-import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,9 @@ import static dev.anilp.ecommerce_backend.entity.user.Gender.FEMALE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(properties = {
-        "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect"
+        "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
+        "spring.flyway.enabled=false",
+        "spring.jpa.hibernate.ddl-auto=update"
 })
 class AddressRepositoryTest {
     @Autowired
@@ -28,27 +30,50 @@ class AddressRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private Flyway flyway;
-
     private Address address;
     private User userWithAddress;
     private User userWithoutAddress;
 
     @BeforeEach
     void setUp() {
-        flyway.clean();
-        flyway.migrate();
-        userWithAddress = new User(null, "Test First Name", "Test Last Name", "test@test.com", FEMALE,
-                LocalDate.of(1990, 1, 1), new ArrayList<>(), new ArrayList<>());
-        address = new Address(null, HOME, "Test Address Line", "Test Street", "Test District",
-                "Test City", "34100", null);
+        userWithAddress = new User(
+                null,
+                "Test First Name",
+                "Test Last Name",
+                "test@test.com",
+                FEMALE,
+                LocalDate.of(1990, 1, 1),
+                new ArrayList<>(), new ArrayList<>(), null
+        );
+        address = new Address(
+                null,
+                HOME,
+                "Test Address Line",
+                "Test Street",
+                "Test District",
+                "Test City",
+                "34100",
+                null
+        );
         userWithAddress.addAddress(address);
         addressRepository.save(address);
 
-        userWithoutAddress = new User(null, "No Phone", "User", "no_phone@test.com", FEMALE,
-                LocalDate.of(1990, 1, 1), new ArrayList<>(), new ArrayList<>());
+        userWithoutAddress = new User(
+                null,
+                "No Address",
+                "User",
+                "no_address@test.com",
+                FEMALE,
+                LocalDate.of(1990, 1, 1),
+                new ArrayList<>(), new ArrayList<>(),
+                null
+        );
         userRepository.save(userWithoutAddress);
+    }
+
+    @AfterEach
+    void tearDown() {
+        userRepository.deleteAll();
     }
 
     @Nested
