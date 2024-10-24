@@ -21,7 +21,7 @@ COMMENT ON COLUMN address.street IS 'Street name';
 COMMENT ON COLUMN address.district IS 'District name';
 COMMENT ON COLUMN address.city IS 'City name';
 COMMENT ON COLUMN address.postal_code IS 'Postal code of the address';
-COMMENT ON COLUMN address.user_id IS 'Reference to the user ID from application_user';
+COMMENT ON COLUMN address.user_id IS 'Reference to the user ID from user';
 COMMENT ON COLUMN address.created_at IS 'Timestamp when the record was created';
 COMMENT ON COLUMN address.updated_at IS 'Timestamp when the record was last updated';
 
