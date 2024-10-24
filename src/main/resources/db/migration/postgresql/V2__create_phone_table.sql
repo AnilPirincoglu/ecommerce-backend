@@ -13,6 +13,6 @@ COMMENT ON TABLE phone IS 'Stores phone numbers associated with users, including
 COMMENT ON COLUMN phone.id IS 'Unique identifier for the phone number';
 COMMENT ON COLUMN phone.phone_type IS 'Type of phone number, can be HOME, WORK, or MOBILE.';
 COMMENT ON COLUMN phone.phone_number IS 'Unique phone number';
-COMMENT ON COLUMN phone.user_id IS 'Foreign key referencing the application_user table (id). Represents the user to whom the phone number belongs.';
+COMMENT ON COLUMN phone.user_id IS 'Foreign key referencing the user table (id).';
 COMMENT ON COLUMN phone.created_at IS 'Timestamp when the record was created';
 COMMENT ON COLUMN phone.updated_at IS 'Timestamp when the record was last updated';
